@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Jeu de Carte - Solo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { 'table-dark': '#0f172a', 'card-blue': '#1e3a8a' },
+                    boxShadow: { 'glow': '0 0 15px rgba(255, 255, 255, 0.1)' }
+                }
+            }
+        }
+    </script>
+    <style>
+        .perspective-1000 { perspective: 1000px; }
+        .preserve-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+    </style>
+</head>
+<body class="h-[100dvh] bg-table-dark text-white font-sans flex flex-col overflow-hidden">
+
+    <main class="flex-grow flex flex-col items-center justify-center space-y-2 relative p-2">
+        <h2 class="text-white/20 font-bold tracking-widest uppercase text-xs mb-2">Mon Jeu</h2>
+        
+        <div class="w-24 h-36 perspective-1000 relative z-10"><div id="card-1-inner" class="w-full h-full relative preserve-3d transition-transform duration-700 rounded-xl shadow-2xl"><div class="absolute w-full h-full backface-hidden bg-card-blue border-2 border-white rounded-xl"><div class="w-full h-full opacity-30 bg-[url('https://www.transparenttextures.com/patterns/diagmonds-light.png')]"></div></div><div id="card-1-front" class="absolute w-full h-full backface-hidden rotate-y-180 bg-white border-2 border-gray-300 rounded-xl flex items-center justify-center"><span class="text-3xl font-bold">?</span></div></div></div>
+        <div class="w-24 h-36 perspective-1000 relative z-10"><div id="card-2-inner" class="w-full h-full relative preserve-3d transition-transform duration-700 rounded-xl shadow-2xl"><div class="absolute w-full h-full backface-hidden bg-card-blue border-2 border-white rounded-xl"><div class="w-full h-full opacity-30 bg-[url('https://www.transparenttextures.com/patterns/diagmonds-light.png')]"></div></div><div id="card-2-front" class="absolute w-full h-full backface-hidden rotate-y-180 bg-white border-2 border-gray-300 rounded-xl flex items-center justify-center"><span class="text-3xl font-bold">?</span></div></div></div>       
+        <div class="w-24 h-36 perspective-1000 relative z-10"><div id="card-3-inner" class="w-full h-full relative preserve-3d transition-transform duration-700 rounded-xl shadow-2xl"><div class="absolute w-full h-full backface-hidden bg-card-blue border-2 border-white rounded-xl"><div class="w-full h-full opacity-30 bg-[url('https://www.transparenttextures.com/patterns/diagmonds-light.png')]"></div></div><div id="card-3-front" class="absolute w-full h-full backface-hidden rotate-y-180 bg-white border-2 border-gray-300 rounded-xl flex items-center justify-center"><span class="text-3xl font-bold">?</span></div></div></div>  
+        <div class="w-24 h-36 perspective-1000 relative z-10"><div id="card-4-inner" class="w-full h-full relative preserve-3d transition-transform duration-700 rounded-xl shadow-2xl"><div class="absolute w-full h-full backface-hidden bg-card-blue border-2 border-white rounded-xl"><div class="w-full h-full opacity-30 bg-[url('https://www.transparenttextures.com/patterns/diagmonds-light.png')]"></div></div><div id="card-4-front" class="absolute w-full h-full backface-hidden rotate-y-180 bg-white border-2 border-gray-300 rounded-xl flex items-center justify-center"><span class="text-3xl font-bold">?</span></div></div></div> 
+    </main>
+
+    <footer class="bg-black/40 backdrop-blur-lg px-4 py-4 border-t border-white/5 flex flex-col justify-center shrink-0">
+        <div id="controls-2-btn" class="flex gap-4 w-full">
+            <button id="btn-left" class="flex-1 py-4 bg-red-600 hover:bg-red-500 text-white font-bold text-lg rounded-full shadow-lg transition-all active:scale-95 border-b-4 border-red-800">ROUGE</button>
+            <button id="btn-right" class="flex-1 py-4 bg-slate-800 hover:bg-slate-700 text-white font-bold text-lg rounded-full shadow-lg transition-all active:scale-95 border border-slate-600 border-b-4 border-slate-950">NOIR</button>
+        </div>
+        <div id="controls-4-btn" class="hidden gap-2 w-full">
+            <button id="btn-heart" class="flex-1 py-4 bg-red-600 text-white font-bold text-2xl rounded-xl shadow-lg border-b-4 border-red-800 active:scale-95">♥</button>
+            <button id="btn-diamond" class="flex-1 py-4 bg-red-600 text-white font-bold text-2xl rounded-xl shadow-lg border-b-4 border-red-800 active:scale-95">♦</button>
+            <button id="btn-spade" class="flex-1 py-4 bg-slate-800 text-white font-bold text-2xl rounded-xl shadow-lg border-b-4 border-slate-950 active:scale-95">♠</button>
+            <button id="btn-club" class="flex-1 py-4 bg-slate-800 text-white font-bold text-2xl rounded-xl shadow-lg border-b-4 border-slate-950 active:scale-95">♣</button>
+        </div>
+    </footer>
+
+    <div id="result-popup" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center">
+        <div class="bg-slate-900 border border-white/20 p-8 rounded-2xl text-center max-w-sm mx-4 shadow-2xl transform scale-100">
+            <div id="popup-icon" class="text-6xl mb-4">🎉</div>
+            <h3 id="popup-title" class="text-2xl font-bold mb-2">Gagné !</h3>
+            <p id="popup-message" class="text-gray-300 mb-6">Message...</p>
+            <button id="btn-popup-action" class="px-6 py-2 bg-blue-600 rounded-full font-bold hover:bg-blue-500 w-full transition-all">OK</button>
+        </div>
+    </div>
+
+    <script src="client.js"></script>
+</body>
+</html>
